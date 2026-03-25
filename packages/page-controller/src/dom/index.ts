@@ -57,7 +57,7 @@ export function getFlatTree(config: DomConfig): FlatDomTree {
 	}
 
 	const elements = domTree({
-		doHighlightElements: true,
+		doHighlightElements: false,
 		debugMode: true,
 		focusHighlightIndex: -1,
 		viewportExpansion,
