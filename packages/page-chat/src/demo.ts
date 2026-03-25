@@ -13,7 +13,7 @@ window.PageChat = PageChat
 
 console.log('🚀 page-chat.js loaded!')
 
-const DEMO_MODEL = 'gemini-3-flash-preview'
+const DEMO_MODEL = 'bjoernb/claude-haiku-4-5'
 const DEMO_BASE_URL = 'http://localhost:11434/v1'
 const DEMO_API_KEY = 'NA'
 
