@@ -8,8 +8,7 @@
         "packages/ui",
         "packages/llms",
         "packages/core",
-        "packages/page-chat",
-        "packages/mcp"
+        "packages/page-chat"
     ],
     "description": "AI-powered UI agent for web applications",
     "author": "Simon<gaomeng1900>",
