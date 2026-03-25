@@ -1,7 +1,7 @@
 {
     "name": "@page-chat/core",
     "private": false,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "module",
     "main": "./dist/esm/page-chat-core.js",
     "module": "./dist/esm/page-chat-core.js",
@@ -43,8 +43,8 @@
         "postpublish": "node -e \"['README.md','LICENSE'].forEach(f=>{try{require('fs').unlinkSync(f)}catch{}})\""
     },
     "dependencies": {
-        "@page-chat/llms": "0.0.1",
-        "@page-chat/page-controller": "0.0.1",
+        "@page-chat/llms": "0.0.2",
+        "@page-chat/page-controller": "0.0.2",
         "chalk": "^5.6.2",
         "html2canvas": "^1.4.1",
         "pdfjs-dist": "^4.0.0"
