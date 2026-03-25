@@ -50,8 +50,8 @@
 
 | Mirrors | URL                                                                              |
 | ------- | -------------------------------------------------------------------------------- |
-| Global  | https://cdn.jsdelivr.net/npm/page-chat@0.0.2/dist/iife/page-chat.demo.js         |
-| China   | https://registry.npmmirror.com/page-chat/0.0.2/files/dist/iife/page-chat.demo.js |
+| Global  | https://cdn.jsdelivr.net/npm/page-chat@0.0.3/dist/iife/page-chat.demo.js         |
+| China   | https://registry.npmmirror.com/page-chat/0.0.3/files/dist/iife/page-chat.demo.js |
 
 ### NPM 安装
 
