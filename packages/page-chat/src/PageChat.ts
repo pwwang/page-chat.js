@@ -44,6 +44,10 @@ export class PageChat extends EventTarget implements PanelChatAdapter {
 			language: config.language,
 			title: config.title,
 		})
+
+		this.refreshPage().catch((error) => {
+			console.warn('[page-chat] Initial page scan failed:', error)
+		})
 	}
 
 	get messages(): ChatMessage[] {
