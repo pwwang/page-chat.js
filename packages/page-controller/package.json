@@ -1,6 +1,6 @@
 {
     "name": "@page-chat/page-controller",
-    "version": "1.6.2",
+    "version": "0.0.0",
     "type": "module",
     "main": "./dist/lib/page-controller.js",
     "module": "./dist/lib/page-controller.js",

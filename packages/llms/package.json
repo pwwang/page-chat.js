@@ -1,6 +1,6 @@
 {
     "name": "@page-chat/llms",
-    "version": "1.6.2",
+    "version": "0.0.0",
     "type": "module",
     "main": "./dist/lib/page-chat-llms.js",
     "module": "./dist/lib/page-chat-llms.js",
