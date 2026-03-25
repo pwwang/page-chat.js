@@ -40,6 +40,6 @@ jobs:
           else
             npm publish --workspaces --access public
           fi
-        with:
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
