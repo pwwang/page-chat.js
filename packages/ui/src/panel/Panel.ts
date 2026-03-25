@@ -281,10 +281,20 @@ export class Panel {
 		this.#textarea.value = ''
 		this.#adjustTextareaHeight()
 
-		this.#abortController = new AbortController()
-		const stream = this.#adapter.sendMessage(text, this.#abortController.signal)
+		const controller = new AbortController()
+		const stream = this.#adapter.sendMessage(text, controller.signal)
+		this.#abortController = controller
 
-		this.#renderMessages()
+		// Show user message immediately (optimistic render).
+		// The async generator hasn't started yet, so adapter.messages
+		// doesn't contain it. Render directly from the input text.
+		const userBubbleHTML = createUserBubble({
+			id: '',
+			role: 'user',
+			content: text || '[attachments]',
+			timestamp: Date.now(),
+		})
+		this.#chatArea.insertAdjacentHTML('beforeend', userBubbleHTML)
 
 		const streamingBubbleHTML = createStreamingBubble()
 		const tempDiv = document.createElement('div')
