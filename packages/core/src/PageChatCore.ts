@@ -190,6 +190,18 @@ export class PageChatCore extends EventTarget {
 			} else {
 				if (assistantText.length > 0) {
 					shouldPersistAssistantMessage = true
+				} else {
+					// Persist an error message when LLM fails with no content
+					const errorPrefix = this.config.language === 'zh-CN' ? '错误' : 'Error'
+					const errorMessage = error instanceof Error ? error.message : String(error)
+					this.messages.push({
+						id: uid(),
+						role: 'assistant',
+						content: `${errorPrefix}: ${errorMessage}`,
+						timestamp: Date.now(),
+						error: true,
+					})
+					this.dispatchEvent(new Event('messagechange'))
 				}
 				throw error
 			}

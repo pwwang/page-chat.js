@@ -25,6 +25,12 @@
 	border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.message.assistant.error {
+	background: rgba(239, 68, 68, 0.15);
+	border-color: rgba(239, 68, 68, 0.3);
+	color: #fca5a5;
+}
+
 .message.assistant .markdown-body {
 	font-family: inherit;
 	font-size: 14px;

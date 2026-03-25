@@ -16,8 +16,9 @@ export function createAssistantBubble(message: ChatMessage): string {
 	// marked.parse is synchronous by default
 	const rawHtml = marked.parse(message.content) as string
 	const content = DOMPurify.sanitize(rawHtml)
+	const errorClass = (message as { error?: boolean }).error ? ' error' : ''
 	return `
-		<div class="message assistant">
+		<div class="message assistant${errorClass}">
 			<div class="content markdown-body">${content}</div>
 		</div>
 	`
