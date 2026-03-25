@@ -1,0 +1,58 @@
+{
+    "name": "@page-chat/core",
+    "private": false,
+    "version": "1.6.2",
+    "type": "module",
+    "main": "./dist/esm/page-chat-core.js",
+    "module": "./dist/esm/page-chat-core.js",
+    "types": "./dist/esm/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/esm/index.d.ts",
+            "import": "./dist/esm/page-chat-core.js",
+            "default": "./dist/esm/page-chat-core.js"
+        }
+    },
+    "files": [
+        "dist/"
+    ],
+    "description": "GUI agent for web applications - add intelligent automation to any webpage with a single script",
+    "keywords": [
+        "ai",
+        "automation",
+        "ui-agent",
+        "GUI-agent",
+        "browser-automation",
+        "web-agent",
+        "llm",
+        "dom-interaction",
+        "web-automation",
+        "GUI-simulation"
+    ],
+    "author": "Simon<gaomeng1900>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/alibaba/page-chat.git"
+    },
+    "homepage": "https://alibaba.github.io/page-chat/",
+    "scripts": {
+        "build": "vite build",
+        "dev:iife": "concurrently \"vite build --config vite.iife.config.js --watch\" \"npx serve dist/iife -p 5174\"",
+        "prepublishOnly": "node -e \"const fs=require('fs');['README.md','LICENSE'].forEach(f=>fs.copyFileSync('../../'+f,f))\"",
+        "postpublish": "node -e \"['README.md','LICENSE'].forEach(f=>{try{require('fs').unlinkSync(f)}catch{}})\""
+    },
+    "dependencies": {
+        "@page-chat/llms": "1.6.2",
+        "@page-chat/page-controller": "1.6.2",
+        "chalk": "^5.6.2",
+        "html2canvas": "^1.4.1",
+        "pdfjs-dist": "^4.0.0"
+    },
+    "peerDependencies": {
+        "zod": "^3.25.0 || ^4.0.0"
+    },
+    "devDependencies": {
+        "zod": "^4.3.5"
+    }
+}
