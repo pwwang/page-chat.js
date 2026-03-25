@@ -149,7 +149,7 @@ export class Panel {
 			<div class="${styles.background}"></div>
 			<div class="${styles.container}">
 				<header class="${styles.header}">
-					<div class="${styles.title}">${ICON_TITLE} ${title ?? this.#i18n.t('panel.title')}</div>
+					<div class="${styles.title}" title="Powered by page-chat.js v0.0.2">${ICON_TITLE} ${title ?? this.#i18n.t('panel.title')}</div>
 					<div class="${styles.controls}">
 						<button class="refresh-btn" title="${this.#i18n.t('panel.refreshPage')}">${ICON_REFRESH}</button>
 						<button class="minimize-btn" title="${this.#i18n.t('panel.minimize')}">${ICON_MINIMIZE}</button>
