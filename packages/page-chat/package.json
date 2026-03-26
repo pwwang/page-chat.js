@@ -1,7 +1,7 @@
 {
     "name": "page-chat",
     "private": false,
-    "version": "0.1.0",
+    "version": "0.1.1",
     "type": "module",
     "main": "./dist/esm/page-chat.js",
     "module": "./dist/esm/page-chat.js",
@@ -44,10 +44,10 @@
         "postpublish": "node -e \"['README.md','LICENSE'].forEach(f=>{try{require('fs').unlinkSync(f)}catch{}})\""
     },
     "dependencies": {
-        "@page-chat/core": "0.1.0",
-        "@page-chat/llms": "0.1.0",
-        "@page-chat/page-controller": "0.1.0",
-        "@page-chat/ui": "0.1.0",
+        "@page-chat/core": "0.1.1",
+        "@page-chat/llms": "0.1.1",
+        "@page-chat/page-controller": "0.1.1",
+        "@page-chat/ui": "0.1.1",
         "chalk": "^5.6.2"
     },
     "peerDependencies": {
