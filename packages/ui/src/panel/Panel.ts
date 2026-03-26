@@ -12,6 +12,7 @@ import type { PanelChatAdapter } from './types'
 
 import styles from './Panel.module.css'
 import './panel-global.css'
+import pkg from '../../package.json'
 
 const ICON_REFRESH = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`
 const ICON_MINIMIZE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`
@@ -149,7 +150,7 @@ export class Panel {
 			<div class="${styles.background}"></div>
 			<div class="${styles.container}">
 				<header class="${styles.header}">
-					<div class="${styles.title}" title="Powered by page-chat.js v0.0.2">${ICON_TITLE} ${title ?? this.#i18n.t('panel.title')}</div>
+					<div class="${styles.title}" title="Powered by page-chat.js v${pkg.version}">${ICON_TITLE} ${title ?? this.#i18n.t('panel.title')}</div>
 					<div class="${styles.controls}">
 						<button class="refresh-btn" title="${this.#i18n.t('panel.refreshPage')}">${ICON_REFRESH}</button>
 						<button class="minimize-btn" title="${this.#i18n.t('panel.minimize')}">${ICON_MINIMIZE}</button>
@@ -164,7 +165,7 @@ export class Panel {
 				<div class="${styles.inputArea}">
 					<button class="${styles.actionBtn} attach-btn" title="${this.#i18n.t('panel.attach')}">${ICON_ATTACH}</button>
 					<button class="${styles.actionBtn} screenshot-btn" title="${this.#i18n.t('panel.screenshot')}">${ICON_SCREENSHOT}</button>
-					
+
 					<div class="${styles.textareaContainer}">
 						<textarea class="${styles.textarea}" rows="1" placeholder="${this.#i18n.t('panel.placeholder')}"></textarea>
 					</div>
