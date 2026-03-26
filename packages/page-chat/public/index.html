@@ -187,6 +187,7 @@ const chat = new PageChat({
   model: 'gpt-4o-mini',
   baseURL: 'https://api.openai.com/v1',
   apiKey: 'YOUR_API_KEY',
+  persist: true // optional, enable conversation history persistence across page reloads
 })
 chat.panel.show()</code></pre>
 			</div>

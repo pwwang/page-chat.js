@@ -9,6 +9,7 @@ export interface PageChatConfig extends LLMConfig {
 	systemPrompt?: string
 	maxConversationTurns?: number
 	transformPageContent?: (content: string) => Promise<string> | string
+	persist?: boolean
 }
 
 export interface ChatMessage {

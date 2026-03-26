@@ -15,6 +15,8 @@ import { Panel, type PanelChatAdapter } from '@page-chat/ui'
 
 export * from '@page-chat/core'
 
+const STORAGE_KEY = 'page-chat:history:v1'
+
 export class PageChat extends EventTarget implements PanelChatAdapter {
 	readonly panel: Panel
 	readonly core: PageChatCore
@@ -35,10 +37,18 @@ export class PageChat extends EventTarget implements PanelChatAdapter {
 		this.core = new PageChatCore({ ...config, pageController })
 		this.config = this.core.config
 
+		if (this.config.persist) {
+			this.#loadFromStorage()
+		}
+
 		this.core.addEventListener('messagechange', this.#onMessageChange)
 		this.core.addEventListener('statuschange', this.#onStatusChange)
 		this.core.addEventListener('attachmentchange', this.#onAttachmentChange)
 		this.core.addEventListener('screenshotchange', this.#onScreenshotChange)
+
+		if (this.config.persist) {
+			this.core.addEventListener('messagechange', this.#onPersistMessages)
+		}
 
 		this.panel = new Panel(this, {
 			language: config.language,
@@ -48,6 +58,29 @@ export class PageChat extends EventTarget implements PanelChatAdapter {
 		this.refreshPage().catch((error) => {
 			console.warn('[page-chat] Initial page scan failed:', error)
 		})
+	}
+
+	#loadFromStorage(): void {
+		try {
+			const saved = localStorage.getItem(STORAGE_KEY)
+			if (saved) {
+				const data = JSON.parse(saved) as { messages: ChatMessage[] }
+				if (data.messages && Array.isArray(data.messages)) {
+					this.core.messages = data.messages
+					this.core.dispatchEvent(new Event('messagechange'))
+				}
+			}
+		} catch (error) {
+			console.warn('[page-chat] Failed to restore history:', error)
+		}
+	}
+
+	#onPersistMessages = (): void => {
+		try {
+			localStorage.setItem(STORAGE_KEY, JSON.stringify({ messages: this.core.messages }))
+		} catch (error) {
+			console.warn('[page-chat] Failed to persist history:', error)
+		}
 	}
 
 	get messages(): ChatMessage[] {
@@ -105,6 +138,9 @@ export class PageChat extends EventTarget implements PanelChatAdapter {
 
 	clear(): void {
 		this.core.clear()
+		if (this.config.persist) {
+			localStorage.removeItem(STORAGE_KEY)
+		}
 	}
 
 	dispose(): void {

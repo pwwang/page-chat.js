@@ -1,6 +1,7 @@
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
 
+import pkg from '../../package.json'
 import { I18n } from '../i18n'
 import {
 	createAssistantBubble,
@@ -12,12 +13,12 @@ import type { PanelChatAdapter } from './types'
 
 import styles from './Panel.module.css'
 import './panel-global.css'
-import pkg from '../../package.json'
 
 const ICON_REFRESH = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`
 const ICON_MINIMIZE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`
 const ICON_RESTORE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>`
 const ICON_CLOSE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`
+const ICON_CLEAR = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>`
 const ICON_ATTACH = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>`
 const ICON_SCREENSHOT = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>`
 const ICON_SEND = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>`
@@ -41,6 +42,7 @@ export class Panel {
 	#attachButton: HTMLButtonElement
 	#screenshotButton: HTMLButtonElement
 	#refreshButton: HTMLButtonElement
+	#clearButton: HTMLButtonElement
 	#minimizeButton: HTMLButtonElement
 	#closeButton: HTMLButtonElement
 
@@ -81,6 +83,7 @@ export class Panel {
 		this.#attachButton = this.#wrapper.querySelector('.attach-btn')!
 		this.#screenshotButton = this.#wrapper.querySelector('.screenshot-btn')!
 		this.#refreshButton = this.#wrapper.querySelector('.refresh-btn')!
+		this.#clearButton = this.#wrapper.querySelector('.clear-btn')!
 		this.#minimizeButton = this.#wrapper.querySelector('.minimize-btn')!
 		this.#closeButton = this.#wrapper.querySelector('.close-btn')!
 
@@ -153,6 +156,7 @@ export class Panel {
 					<div class="${styles.title}" title="Powered by page-chat.js v${pkg.version}">${ICON_TITLE} ${title ?? this.#i18n.t('panel.title')}</div>
 					<div class="${styles.controls}">
 						<button class="refresh-btn" title="${this.#i18n.t('panel.refreshPage')}">${ICON_REFRESH}</button>
+						<button class="clear-btn" title="${this.#i18n.t('panel.clearChat')}">${ICON_CLEAR}</button>
 						<button class="minimize-btn" title="${this.#i18n.t('panel.minimize')}">${ICON_MINIMIZE}</button>
 						<button class="close-btn" title="${this.#i18n.t('panel.close')}">${ICON_CLOSE}</button>
 					</div>
@@ -190,6 +194,7 @@ export class Panel {
 				console.error('Refresh failed', error)
 			}
 		})
+		this.#clearButton.addEventListener('click', () => this.reset())
 		this.#minimizeButton.addEventListener('click', () =>
 			this.#isExpanded ? this.collapse() : this.expand()
 		)

@@ -64,6 +64,7 @@ const chat = new PageChat({
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
     apiKey: 'YOUR_API_KEY',
     language: 'en-US',
+    persist: true, // optional, enable conversation history persistence across page reloads
     title: 'My Assistant', // optional — customises the chat panel title
 })
 ```
