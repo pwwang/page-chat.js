@@ -25,6 +25,8 @@ const ICON_SEND = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" s
 const ICON_STOP = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>`
 const ICON_TITLE = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>`
 
+const STORAGE_KEY = 'page-chat:panel:minimized'
+
 export interface PanelConfig {
 	language?: 'en-US' | 'zh-CN'
 	title?: string
@@ -102,6 +104,12 @@ export class Panel {
 		requestAnimationFrame(() => {
 			this.#wrapper.style.opacity = '1'
 			this.#wrapper.style.transform = 'translateX(-50%) translateY(0)'
+			const minimized = localStorage.getItem(STORAGE_KEY) === 'true'
+			if (minimized) {
+				this.collapse()
+			} else {
+				this.expand()
+			}
 		})
 	}
 
@@ -119,6 +127,7 @@ export class Panel {
 		this.#attachmentsBar.style.display = 'flex'
 		this.#inputArea.style.display = 'flex'
 		this.#minimizeButton.innerHTML = ICON_MINIMIZE
+		localStorage.setItem(STORAGE_KEY, 'false')
 	}
 
 	collapse(): void {
@@ -127,6 +136,7 @@ export class Panel {
 		this.#attachmentsBar.style.display = 'none'
 		this.#inputArea.style.display = 'none'
 		this.#minimizeButton.innerHTML = ICON_RESTORE
+		localStorage.setItem(STORAGE_KEY, 'true')
 	}
 
 	dispose(): void {
