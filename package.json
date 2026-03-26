@@ -5,9 +5,9 @@
     "type": "module",
     "workspaces": [
         "packages/page-controller",
+        "packages/llms",
         "packages/core",
         "packages/ui",
-        "packages/llms",
         "packages/page-chat"
     ],
     "description": "AI-powered UI agent for web applications",
