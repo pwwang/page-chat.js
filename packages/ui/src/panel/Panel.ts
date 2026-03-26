@@ -198,7 +198,8 @@ export class Panel {
 		this.#minimizeButton.addEventListener('click', () =>
 			this.#isExpanded ? this.collapse() : this.expand()
 		)
-		this.#closeButton.addEventListener('click', () => this.#adapter.dispose())
+		// this.#closeButton.addEventListener('click', () => this.#adapter.dispose())
+		this.#closeButton.addEventListener('click', () => this.hide())
 
 		this.#attachButton.addEventListener('click', () => this.#fileInput.click())
 		this.#screenshotButton.addEventListener('click', async () => {
